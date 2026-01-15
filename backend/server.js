@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const connectDB = require('./db/config');
 const Amenity = require('./models/Amenity');
 const authRoutes = require('./routes/auth');
+const { verifyToken } = require('./middleware/auth');
 
 dotenv.config();
 
@@ -29,7 +30,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 
 //get amenities route
-app.get('/amenities', async (req, res) => {
+app.get('/amenities', verifyToken, async (req, res) => {
   try{
     const amenities = await Amenity.find();
     res.json({ count: amenities.length, amenities });
