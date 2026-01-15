@@ -9,10 +9,11 @@ A comprehensive full-stack web application designed to streamline residential so
 - **Database** - MongoDB with Mongoose ODM
 - **Data Models** - User, Booking, Expense, Amenity, and Family Member schemas
 - **Sample Data** - Pre-seeded amenities (Clubhouse, Garden, Swimming Pool, Community Hall)
-- **API Testing** - Working endpoints verified
+- **User Authentication** - Register, Login with JWT tokens
+- **Protected Routes** - JWT verification for secure endpoints
 
 ### In Progress 🔨
-- User Authentication (JWT-based)
+- Authentication Middleware for all routes
 - Member Management APIs
 - Booking System APIs
 - Expense Tracking APIs
