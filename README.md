@@ -11,9 +11,9 @@ A comprehensive full-stack web application designed to streamline residential so
 - **Sample Data** - Pre-seeded amenities (Clubhouse, Garden, Swimming Pool, Community Hall)
 - **User Authentication** - Register, Login with JWT tokens
 - **Protected Routes** - JWT verification for secure endpoints
+- **Authentication Middleware** - JWT verification for protected routes
 
 ### In Progress 🔨
-- Authentication Middleware for all routes
 - Member Management APIs
 - Booking System APIs
 - Expense Tracking APIs
