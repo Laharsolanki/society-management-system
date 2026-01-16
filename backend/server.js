@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const connectDB = require('./db/config');
 const Amenity = require('./models/Amenity');
 const authRoutes = require('./routes/auth');
+const memberRoutes = require('./routes/members');
 const { verifyToken } = require('./middleware/auth');
 
 dotenv.config();
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
 
 
 app.use('/api/auth', authRoutes);
+app.use('/api/members', memberRoutes);
 
 //get amenities route
 app.get('/amenities', verifyToken, async (req, res) => {
