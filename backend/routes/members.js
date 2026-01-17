@@ -104,4 +104,19 @@ router.post('/family', verifyToken, async (req, res) => {
   }
 });
 
+// Get all family members for logged-in user
+router.get('/family', verifyToken, async (req, res) => {
+  try {
+    const familyMembers = await FamilyMember.find({ user_id: req.user.id }).sort({ createdAt: -1 });
+
+    res.json({
+      count: familyMembers.length,
+      family_members: familyMembers
+    });
+  } catch (error) {
+    console.error('Get family members error:', error);
+    res.status(500).json({ error: 'Server error while fetching family members' });
+  }
+});
+
 module.exports = router;
