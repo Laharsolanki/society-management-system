@@ -11,10 +11,10 @@ A comprehensive full-stack web application designed to streamline residential so
 - **Sample Data** - Pre-seeded amenities (Clubhouse, Garden, Swimming Pool, Community Hall)
 - **User Authentication** - Register, Login with JWT tokens
 - **Protected Routes** - JWT verification for secure endpoints
-- **Authentication Middleware** - JWT verification for protected routes
+- **Member Management** - View all members (admin), profile management, family member CRUD
+- **Role-Based Access** - Admin and member permission levels
 
 ### In Progress 🔨
-- Member Management APIs
 - Booking System APIs
 - Expense Tracking APIs
 
@@ -136,14 +136,22 @@ node seedData.js
 ## 📝 API Endpoints
 
 ### Current Endpoints
-- `GET /` - Health check
-- `GET /amenities` - Get all amenities
-
-### Upcoming Endpoints
+**Authentication:**
 - `POST /api/auth/register` - User registration
 - `POST /api/auth/login` - User login
-- `GET /api/members/profile` - Get user profile
+- `GET /api/auth/me` - Get current user
+
+**Members:**
+- `GET /api/members` - Get all members (Admin only)
+- `GET /api/members/profile` - Get own profile
+- `PUT /api/members/profile` - Update own profile
+- `POST /api/members/family` - Add family member
+- `GET /api/members/family` - Get family members
+- `DELETE /api/members/family/:id` - Delete family member
+
+### Upcoming Endpoints
 - `POST /api/bookings` - Create booking
+- `GET /api/bookings` - Get bookings
 - `GET /api/expenses` - Get all expenses
 - And more...
 
