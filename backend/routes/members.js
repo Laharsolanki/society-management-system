@@ -43,4 +43,35 @@ router.get('/profile', verifyToken, async (req, res) => {
   }
 });
 
+// Update own profile
+router.put('/profile', verifyToken, async (req, res) => {
+  try {
+    const { name, phone } = req.body;
+
+    // Validate input
+    if (!name || !phone) {
+      return res.status(400).json({ error: 'Name and phone are required' });
+    }
+
+    // Update user
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user.id,
+      { name, phone },
+      { new: true, runValidators: true }
+    ).select('-password');
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({
+      message: 'Profile updated successfully',
+      user: updatedUser
+    });
+  } catch (error) {
+    console.error('Update profile error:', error);
+    res.status(500).json({ error: 'Server error while updating profile' });
+  }
+});
+
 module.exports = router;
