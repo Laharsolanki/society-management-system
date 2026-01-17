@@ -74,4 +74,34 @@ router.put('/profile', verifyToken, async (req, res) => {
   }
 });
 
+// Add family member
+router.post('/family', verifyToken, async (req, res) => {
+  try {
+    const { name, age, relation } = req.body;
+
+    // Validate input
+    if (!name || !relation) {
+      return res.status(400).json({ error: 'Name and relation are required' });
+    }
+
+    // Create new family member
+    const familyMember = new FamilyMember({
+      user_id: req.user.id,
+      name,
+      age,
+      relation
+    });
+
+    await familyMember.save();
+
+    res.status(201).json({
+      message: 'Family member added successfully',
+      family_member: familyMember
+    });
+  } catch (error) {
+    console.error('Add family member error:', error);
+    res.status(500).json({ error: 'Server error while adding family member' });
+  }
+});
+
 module.exports = router;
