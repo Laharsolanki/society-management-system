@@ -119,4 +119,29 @@ router.get('/family', verifyToken, async (req, res) => {
   }
 });
 
+// Delete family member
+router.delete('/family/:id', verifyToken, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Find and delete family member (only if it belongs to the user)
+    const familyMember = await FamilyMember.findOneAndDelete({
+      _id: id,
+      user_id: req.user.id
+    });
+
+    if (!familyMember) {
+      return res.status(404).json({ error: 'Family member not found or unauthorized' });
+    }
+
+    res.json({
+      message: 'Family member deleted successfully',
+      deleted: familyMember
+    });
+  } catch (error) {
+    console.error('Delete family member error:', error);
+    res.status(500).json({ error: 'Server error while deleting family member' });
+  }
+});
+
 module.exports = router;
