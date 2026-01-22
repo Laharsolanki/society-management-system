@@ -33,15 +33,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/members', memberRoutes);
 app.use('/api/bookings', bookingRoutes);
 
-//get amenities route
-app.get('/amenities', verifyToken, async (req, res) => {
-  try{
-    const amenities = await Amenity.find();
-    res.json({ count: amenities.length, amenities });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
